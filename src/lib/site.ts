@@ -22,12 +22,20 @@ export const MAILBOX = {
   fallback: 'contact@zephryx.in',
 } as const;
 
+/**
+ * `external` marks a link to a different origin (the parent research site,
+ * not a page on this one) — rendered as a plain anchor opened in a new tab
+ * so it never enters client-side routing. The footer already carries a
+ * dedicated zephryx.in link in its CONTACT column, so Footer filters this
+ * entry out of the ROUTES list rather than showing it twice.
+ */
 export const NAV = [
-  { href: '/', label: 'Home', cmd: '~' },
-  { href: '/services/', label: 'Services', cmd: 'ls' },
-  { href: '/process/', label: 'Process', cmd: 'run' },
-  { href: '/about/', label: 'About', cmd: 'whoami' },
-  { href: '/contact/', label: 'Contact', cmd: 'handshake' },
+  { href: '/', label: 'Home', cmd: '~', external: false },
+  { href: '/services/', label: 'Services', cmd: 'ls', external: false },
+  { href: '/process/', label: 'Process', cmd: 'run', external: false },
+  { href: '/about/', label: 'About', cmd: 'whoami', external: false },
+  { href: SITE.parentUrl, label: 'zephryx.in', cmd: 'parent', external: true },
+  { href: '/contact/', label: 'Contact', cmd: 'handshake', external: false },
 ] as const;
 
 export type Service = {
