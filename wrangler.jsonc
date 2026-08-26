@@ -7,6 +7,10 @@
     "LEAD_TO": "hello@security.zephryx.in",
     "LEAD_FROM": "Zephryx Security <noreply@mail.zephryx.in>"
   },
+  "kv_namespaces": [
+    { "binding": "LEADS", "id": "677a4d26c51b4ca0b35a8d3785c6dccf" },
+    { "binding": "LEADS_RL", "id": "1513048abd0f4cffa768ee444236d280" }
+  ],
   "assets": {
     "directory": "out",
     "binding": "ASSETS",

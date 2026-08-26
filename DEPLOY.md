@@ -52,19 +52,17 @@ is already verified for the sibling sites' forms, so this reuses it.
 forwarding to whatever inbox you actually read) before the first request
 arrives, or point `LEAD_TO` at an inbox that already exists.
 
-## 4. Optional: KV namespaces
+## 4. KV namespaces — already provisioned
 
-Both are optional and the endpoint degrades cleanly without them, but the
-lead list is worth having — it is the durable record, and the email is only a
-notification. For a services business this matters more than it did for the
-sibling sites' waitlists: a lost lead is lost revenue.
+Both namespaces exist on the account already and their ids are wired into
+`wrangler.jsonc`. Nothing to do here unless you're rotating them:
 
 ```bash
 npx wrangler kv namespace create LEADS
 npx wrangler kv namespace create LEADS_RL
 ```
 
-Each command prints an `id`. Add them to `wrangler.jsonc`:
+Each command prints an `id`. Update `wrangler.jsonc`:
 
 ```jsonc
 "kv_namespaces": [
