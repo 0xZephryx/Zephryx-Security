@@ -115,9 +115,13 @@ export default function Home() {
           />
         </Reveal>
 
-        <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        {/* Eight services over three columns leaves an orphan cell, and an empty
+            cell in a gap-px grid shows the container's bg-line as a solid block
+            rather than reading as blank space. The closing cell fills it — and
+            spans both columns at sm, where eight cards already tile evenly. */}
+        <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.id} delay={(i % 4) * 60}>
+            <Reveal key={s.id} delay={(i % 3) * 60}>
               <Link
                 href={`/services/${s.id}/`}
                 className="group flex h-full flex-col bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
@@ -133,6 +137,25 @@ export default function Home() {
               </Link>
             </Reveal>
           ))}
+
+          <Reveal className="sm:col-span-2 lg:col-span-1">
+            <Link
+              href="/contact/"
+              className="group flex h-full flex-col justify-center bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
+            >
+              <span className="font-mono text-[10px] tracking-[0.3em] text-red-blood/70">?</span>
+              <h3 className="mt-3 font-mono text-[15px] font-semibold text-ink">
+                Not sure which you need
+              </h3>
+              <p className="mt-2.5 text-[13px] leading-relaxed text-ink-dim">
+                Most engagements end up spanning two or three of these. Describe the environment
+                and it gets scoped from scratch.
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-red-blood/80 transition-transform duration-300 group-hover:translate-x-0.5">
+                start a conversation <span aria-hidden>→</span>
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
 
