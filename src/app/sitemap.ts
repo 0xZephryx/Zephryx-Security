@@ -6,7 +6,7 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const pages: MetadataRoute.Sitemap = NAV.map((item) => ({
+  const pages: MetadataRoute.Sitemap = NAV.filter((item) => !item.external).map((item) => ({
     url: `${SITE.url}${item.href}`,
     lastModified: now,
     changeFrequency: 'weekly',

@@ -2,9 +2,41 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { NAV, SITE } from '@/lib/site';
 import ZephryxMark from '@/components/ZephryxMark';
+
+/** Renders `Link` for an internal route, or a new-tab anchor for `external` — see NAV in site.ts. */
+function NavLink({
+  item,
+  active,
+  className,
+  children,
+}: {
+  item: { href: string; external: boolean };
+  active: boolean;
+  className: string;
+  children: ReactNode;
+}) {
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer external"
+        aria-current={active ? 'page' : undefined}
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={item.href} aria-current={active ? 'page' : undefined} className={className}>
+      {children}
+    </Link>
+  );
+}
 
 export default function Nav() {
   const pathname = usePathname();
@@ -49,12 +81,12 @@ export default function Nav() {
 
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {NAV.map((item) => {
-            const active = isActive(item.href);
+            const active = !item.external && isActive(item.href);
             return (
-              <Link
+              <NavLink
                 key={item.href}
-                href={item.href}
-                aria-current={active ? 'page' : undefined}
+                item={item}
+                active={active}
                 className={`group relative flex items-baseline gap-1.5 px-3 py-2 font-mono text-[13px] transition-colors duration-300 ${
                   active ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
                 }`}
@@ -73,7 +105,7 @@ export default function Nav() {
                     active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`}
                 />
-              </Link>
+              </NavLink>
             );
           })}
           <Link
@@ -104,20 +136,24 @@ export default function Nav() {
         }`}
       >
         <nav className="flex flex-col px-5 py-3" aria-label="Mobile">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center justify-between border-b border-line/50 py-3.5 font-mono text-sm last:border-0 ${
-                isActive(item.href) ? 'text-red-blood' : 'text-ink-dim'
-              }`}
-            >
-              <span>{item.label}</span>
-              <span className="text-[11px] text-ink-faint" aria-hidden>
-                {item.cmd}
-              </span>
-            </Link>
-          ))}
+          {NAV.map((item) => {
+            const active = !item.external && isActive(item.href);
+            return (
+              <NavLink
+                key={item.href}
+                item={item}
+                active={active}
+                className={`flex items-center justify-between border-b border-line/50 py-3.5 font-mono text-sm last:border-0 ${
+                  active ? 'text-red-blood' : 'text-ink-dim'
+                }`}
+              >
+                <span>{item.label}</span>
+                <span className="text-[11px] text-ink-faint" aria-hidden>
+                  {item.cmd}
+                </span>
+              </NavLink>
+            );
+          })}
           <Link href="/contact/" className="py-3.5 font-mono text-sm text-red-blood">
             Request assessment →
           </Link>

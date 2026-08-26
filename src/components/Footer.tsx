@@ -29,7 +29,8 @@ export default function Footer() {
           <nav aria-label="Footer">
             <h3 className="mb-4 font-mono text-[11px] tracking-[0.3em] text-ink-faint">ROUTES</h3>
             <ul className="space-y-2.5">
-              {NAV.map((item) => (
+              {/* zephryx.in already has its own link in the CONTACT column below. */}
+              {NAV.filter((item) => !item.external).map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
