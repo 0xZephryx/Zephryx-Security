@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { MAILBOX, NAV, SITE } from '@/lib/site';
+import ZephryxMark from '@/components/ZephryxMark';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -10,9 +11,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="flex h-7 w-7 items-center justify-center border border-red-deep/60 bg-red-ash/20 font-mono text-[13px] font-bold text-red-blood">
-                Z
-              </span>
+              <ZephryxMark size={28} />
               <span className="font-mono text-[15px] font-semibold text-ink">
                 zephryx<span className="text-red-blood">/security</span>
               </span>

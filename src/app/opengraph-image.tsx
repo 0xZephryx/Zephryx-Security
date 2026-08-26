@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { SITE } from '@/lib/site';
+import { MARK_FRAME, MARK_Z, MARK_COLORS } from '@/components/ZephryxMark';
 
 /**
  * Static social-preview card. No dynamic params, so `output: 'export'` bakes
@@ -85,22 +86,23 @@ export default function OgImage() {
             color: '#5c6675',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              width: 34,
-              height: 34,
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid rgba(143,13,36,0.6)',
-              background: 'rgba(74,10,23,0.2)',
-              color: '#ff2d4b',
-              fontWeight: 700,
-              fontSize: 18,
-            }}
-          >
-            Z
-          </div>
+          <svg width="36" height="36" viewBox="0 0 32 32" style={{ display: 'flex' }}>
+            <path
+              d={MARK_FRAME}
+              fill="none"
+              stroke={MARK_COLORS.frame}
+              strokeWidth="1.2"
+              strokeLinecap="round"
+            />
+            <path
+              d={MARK_Z}
+              fill="none"
+              stroke={MARK_COLORS.stroke}
+              strokeWidth="2.6"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          </svg>
           <span>{SITE.domain}</span>
         </div>
 

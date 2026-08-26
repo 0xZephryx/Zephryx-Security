@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { NAV, SITE } from '@/lib/site';
+import ZephryxMark from '@/components/ZephryxMark';
 
 export default function Nav() {
   const pathname = usePathname();
@@ -37,9 +38,9 @@ export default function Nav() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} — home`}>
-          <span className="relative flex h-7 w-7 items-center justify-center border border-red-deep/60 bg-red-ash/20">
-            <span className="animate-pulse-ring absolute inset-0" />
-            <span className="font-mono text-[13px] font-bold text-red-blood">Z</span>
+          <span className="relative flex h-7 w-7 items-center justify-center">
+            <span className="animate-pulse-ring absolute inset-[2px] rounded-[3px]" />
+            <ZephryxMark size={28} />
           </span>
           <span className="font-mono text-[15px] font-semibold tracking-tight text-ink">
             zephryx<span className="text-red-blood">/security</span>

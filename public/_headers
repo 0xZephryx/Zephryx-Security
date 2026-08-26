@@ -18,11 +18,16 @@
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Next emits the social card as an extensionless file, so the edge has nothing
-# to infer a type from — and a card served as octet-stream is dropped by some
-# scrapers. Same reasoning for security.txt, which RFC 9116 consumers are
-# strict about.
+# Next emits the social card and the iOS touch icon as extensionless files, so
+# the edge has nothing to infer a type from — a card served as octet-stream is
+# dropped by some scrapers, and iOS refuses a touch icon that isn't typed as an
+# image. Same reasoning for security.txt, which RFC 9116 consumers are strict
+# about.
 /opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400
+
+/apple-icon
   Content-Type: image/png
   Cache-Control: public, max-age=86400
 
