@@ -16,6 +16,20 @@ npm run deploy          # next build + wrangler deploy
 That creates a Worker named `zephryx-security` and uploads `out/` as its
 static assets. It will be live on its `*.workers.dev` URL immediately.
 
+## 1a. Workers Builds (Git integration)
+
+If this repo is connected to Cloudflare's Git integration (Workers & Pages →
+zephryx-security → Settings → Build), it runs a **Build command** followed by
+a deploy command on every push — but the Build command is empty by default,
+which skips `next build` entirely and leaves Wrangler looking for an `out/`
+directory that was never created. Set:
+
+- **Build command**: `npm run build`
+
+Workers Builds does not read any build config from `wrangler.jsonc` (Cloudflare
+docs: [Configuration](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)),
+so this has to be set in the dashboard, not the repo.
+
 ## 2. Custom domain
 
 In the Cloudflare dashboard: **Workers & Pages → zephryx-security → Settings
