@@ -56,19 +56,20 @@ Worker:
 
 | Variable    | Value                                        |
 | ----------- | --------------------------------------------- |
-| `LEAD_TO`   | `contact@zephryx.in`                           |
+| `LEAD_TO`   | `hello@security.zephryx.in`                    |
 | `LEAD_FROM` | `Zephryx Security <noreply@mail.zephryx.in>`   |
 
 `LEAD_FROM` must be a sender on a domain verified in Resend. `mail.zephryx.in`
 is already verified for the sibling sites' forms, so this reuses it.
 
-`LEAD_TO` points at `contact@zephryx.in` rather than a `security.zephryx.in`
-subdomain address on purpose: `zephryx.in` mail is hosted externally (not
-Cloudflare Email Routing, which is disabled on the zone), and a
-`security.zephryx.in`-scoped address would need its own mail hosting set up
-before it could receive anything. `contact@zephryx.in` is already a live,
-delivering inbox — confirmed via the Resend "Sending" log — so reuse it
-unless a dedicated inbox for this site gets set up later.
+`hello@security.zephryx.in` is a real mailbox: `security.zephryx.in` is
+onboarded as its own custom domain in ProtonMail (Settings → Domain names),
+independent of the `zephryx.in` root domain's own mail setup — Cloudflare
+Email Routing stays disabled on the zone; this is unrelated to it. If that
+Proton domain onboarding is ever removed, `LEAD_TO` needs to move to an
+address that actually receives mail (e.g. `contact@zephryx.in`) before
+anything is deployed — otherwise notifications silently vanish, same as the
+original bug this address caused.
 
 ## 4. KV namespaces — already provisioned
 
