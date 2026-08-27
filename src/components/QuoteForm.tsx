@@ -160,12 +160,12 @@ export default function QuoteForm() {
 
       setStatus({
         state: 'error',
-        msg: data?.error ?? 'Send failed. Email hello@security.zephryx.in directly.',
+        msg: data?.error ?? 'Send failed. Email contact@zephryx.in directly.',
       });
     } catch {
       setStatus({
         state: 'error',
-        msg: 'Network error. The channel may be offline — reach me at hello@security.zephryx.in.',
+        msg: 'Network error. The channel may be offline — reach me at contact@zephryx.in.',
       });
     }
   };

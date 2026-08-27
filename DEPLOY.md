@@ -16,6 +16,20 @@ npm run deploy          # next build + wrangler deploy
 That creates a Worker named `zephryx-security` and uploads `out/` as its
 static assets. It will be live on its `*.workers.dev` URL immediately.
 
+## 1a. Workers Builds (Git integration)
+
+If this repo is connected to Cloudflare's Git integration (Workers & Pages →
+zephryx-security → Settings → Build), it runs a **Build command** followed by
+a deploy command on every push — but the Build command is empty by default,
+which skips `next build` entirely and leaves Wrangler looking for an `out/`
+directory that was never created. Set:
+
+- **Build command**: `npm run build`
+
+Workers Builds does not read any build config from `wrangler.jsonc` (Cloudflare
+docs: [Configuration](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)),
+so this has to be set in the dashboard, not the repo.
+
 ## 2. Custom domain
 
 In the Cloudflare dashboard: **Workers & Pages → zephryx-security → Settings
@@ -42,15 +56,19 @@ Worker:
 
 | Variable    | Value                                        |
 | ----------- | --------------------------------------------- |
-| `LEAD_TO`   | `hello@security.zephryx.in`                    |
+| `LEAD_TO`   | `contact@zephryx.in`                           |
 | `LEAD_FROM` | `Zephryx Security <noreply@mail.zephryx.in>`   |
 
 `LEAD_FROM` must be a sender on a domain verified in Resend. `mail.zephryx.in`
 is already verified for the sibling sites' forms, so this reuses it.
 
-`hello@security.zephryx.in` does not exist yet — create it (or set up
-forwarding to whatever inbox you actually read) before the first request
-arrives, or point `LEAD_TO` at an inbox that already exists.
+`LEAD_TO` points at `contact@zephryx.in` rather than a `security.zephryx.in`
+subdomain address on purpose: `zephryx.in` mail is hosted externally (not
+Cloudflare Email Routing, which is disabled on the zone), and a
+`security.zephryx.in`-scoped address would need its own mail hosting set up
+before it could receive anything. `contact@zephryx.in` is already a live,
+delivering inbox — confirmed via the Resend "Sending" log — so reuse it
+unless a dedicated inbox for this site gets set up later.
 
 ## 4. KV namespaces — already provisioned
 

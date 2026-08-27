@@ -23,7 +23,7 @@
  *
  * Required environment (Worker → Settings → Variables and Secrets):
  *  - RESEND_API_KEY  (secret)  Resend API key
- *  - LEAD_TO         inbox that receives requests      e.g. hello@security.zephryx.in
+ *  - LEAD_TO         inbox that receives requests      e.g. contact@zephryx.in
  *  - LEAD_FROM       verified Resend sender             e.g. "Zephryx Security <noreply@mail.zephryx.in>"
  * Optional:
  *  - LEADS           KV namespace binding storing the lead list
@@ -213,7 +213,7 @@ async function handleQuote(request: Request, env: Env): Promise<Response> {
     console.error('quote: missing RESEND_API_KEY / LEAD_TO / LEAD_FROM');
     if (stored) return json({ ok: true });
     return json(
-      { ok: false, error: 'Request channel not configured. Email hello@security.zephryx.in directly.' },
+      { ok: false, error: 'Request channel not configured. Email contact@zephryx.in directly.' },
       503,
     );
   }
@@ -242,12 +242,12 @@ async function handleQuote(request: Request, env: Env): Promise<Response> {
       const detail = await res.text().catch(() => '');
       console.error('resend error', res.status, detail);
       if (stored) return json({ ok: true });
-      return json({ ok: false, error: 'Send failed. Please email hello@security.zephryx.in.' }, 502);
+      return json({ ok: false, error: 'Send failed. Please email contact@zephryx.in.' }, 502);
     }
   } catch (e) {
     console.error('resend fetch failed', e);
     if (stored) return json({ ok: true });
-    return json({ ok: false, error: 'Send failed. Please email hello@security.zephryx.in.' }, 502);
+    return json({ ok: false, error: 'Send failed. Please email contact@zephryx.in.' }, 502);
   }
 
   return json({ ok: true });
