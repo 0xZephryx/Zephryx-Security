@@ -4,7 +4,7 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-08-06",
   "vars": {
-    "LEAD_TO": "hello@security.zephryx.in",
+    "LEAD_TO": "contact@zephryx.in",
     "LEAD_FROM": "Zephryx Security <noreply@mail.zephryx.in>"
   },
   "kv_namespaces": [

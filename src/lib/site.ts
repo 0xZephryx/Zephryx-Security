@@ -18,8 +18,7 @@ export const SITE = {
 } as const;
 
 export const MAILBOX = {
-  address: 'hello@security.zephryx.in',
-  fallback: 'contact@zephryx.in',
+  address: 'contact@zephryx.in',
 } as const;
 
 /**

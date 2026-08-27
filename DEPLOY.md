@@ -42,15 +42,19 @@ Worker:
 
 | Variable    | Value                                        |
 | ----------- | --------------------------------------------- |
-| `LEAD_TO`   | `hello@security.zephryx.in`                    |
+| `LEAD_TO`   | `contact@zephryx.in`                           |
 | `LEAD_FROM` | `Zephryx Security <noreply@mail.zephryx.in>`   |
 
 `LEAD_FROM` must be a sender on a domain verified in Resend. `mail.zephryx.in`
 is already verified for the sibling sites' forms, so this reuses it.
 
-`hello@security.zephryx.in` does not exist yet — create it (or set up
-forwarding to whatever inbox you actually read) before the first request
-arrives, or point `LEAD_TO` at an inbox that already exists.
+`LEAD_TO` points at `contact@zephryx.in` rather than a `security.zephryx.in`
+subdomain address on purpose: `zephryx.in` mail is hosted externally (not
+Cloudflare Email Routing, which is disabled on the zone), and a
+`security.zephryx.in`-scoped address would need its own mail hosting set up
+before it could receive anything. `contact@zephryx.in` is already a live,
+delivering inbox — confirmed via the Resend "Sending" log — so reuse it
+unless a dedicated inbox for this site gets set up later.
 
 ## 4. KV namespaces — already provisioned
 
