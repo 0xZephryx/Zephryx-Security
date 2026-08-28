@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MAILBOX, NAV, SITE } from '@/lib/site';
+import { MAILBOX, NAV, NETWORK, SITE } from '@/lib/site';
 import ZephryxMark from '@/components/ZephryxMark';
 
 export default function Footer() {
@@ -65,32 +65,25 @@ export default function Footer() {
                   {MAILBOX.address}
                 </a>
               </li>
-              <li>
-                <a
-                  href={SITE.parentUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 font-mono text-sm text-ink-dim transition-colors hover:text-red-blood"
-                >
-                  zephryx.in — research &amp; writeups
-                  <span className="text-ink-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red-blood">
-                    ↗
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://academy.zephryx.in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 font-mono text-sm text-ink-dim transition-colors hover:text-red-blood"
-                >
-                  academy.zephryx.in — training
-                  <span className="text-ink-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red-blood">
-                    ↗
-                  </span>
-                </a>
-              </li>
+              {/* Sibling sites, rendered from NETWORK in site.ts. These were
+                  written out by hand, which is how the parent kept its
+                  "research & writeups" label months after the research moved to
+                  its own domain, and how the research site ended up unlisted. */}
+              {NETWORK.map((site) => (
+                <li key={site.href}>
+                  <a
+                    href={site.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 font-mono text-sm text-ink-dim transition-colors hover:text-red-blood"
+                  >
+                    {site.host} — {site.blurb}
+                    <span className="text-ink-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red-blood">
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

@@ -28,6 +28,66 @@ export const MAILBOX = {
  * dedicated zephryx.in link in its CONTACT column, so Footer filters this
  * entry out of the ROUTES list rather than showing it twice.
  */
+/**
+ * The rest of the network.
+ *
+ * Hostnames belong here rather than inline in a page, same rule as everything
+ * else in this file — the research corpus moving to its own domain broke two
+ * links on /about/ and a label in the footer precisely because those were
+ * written out by hand where nobody would think to look for them.
+ *
+ * `blurb` is what each site is for. Three hostnames off one domain is exactly
+ * the case where a bare hostname makes a reader guess.
+ */
+export const NETWORK = [
+  {
+    href: 'https://zephryx.in/',
+    host: 'zephryx.in',
+    blurb: 'portfolio & tooling',
+  },
+  {
+    href: 'https://writeups.zephryx.in/',
+    host: 'writeups.zephryx.in',
+    blurb: 'research & writeups',
+  },
+  {
+    href: 'https://academy.zephryx.in/',
+    host: 'academy.zephryx.in',
+    blurb: 'training',
+  },
+] as const;
+
+/**
+ * The public work this site points at as evidence.
+ *
+ * This is the credibility story: verifiable rather than asserted. Each entry
+ * has to resolve directly — a link that only works via a redirect is a link
+ * that will eventually stop working, and these exist to be checked.
+ */
+export const PUBLIC_WORK = [
+  {
+    href: 'https://writeups.zephryx.in/writeups/',
+    label: 'writeups.zephryx.in/writeups',
+    title: 'Writeups',
+    blurb:
+      'Attack-path research, dead ends included — the same reasoning that goes into a client engagement.',
+  },
+  {
+    href: 'https://zephryx.in/arsenal/',
+    label: 'zephryx.in/arsenal',
+    title: 'Tooling',
+    blurb:
+      'Open-source recon and detection-engineering tools, including SigmaWarden, the Sigma-rule linter used to validate the rules delivered on Purple Team engagements.',
+  },
+  {
+    href: 'https://writeups.zephryx.in/detections/',
+    label: 'writeups.zephryx.in/detections',
+    title: 'Detections',
+    blurb:
+      'Published Sigma rules mapped to MITRE ATT&CK — the format every Purple Team deliverable follows.',
+  },
+] as const;
+
 export const NAV = [
   { href: '/', label: 'Home', cmd: '~', external: false },
   { href: '/services/', label: 'Services', cmd: 'ls', external: false },

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MAILBOX, SITE } from '@/lib/site';
+import { MAILBOX, PUBLIC_WORK, SITE } from '@/lib/site';
 import Reveal from '@/components/Reveal';
 
 export const metadata: Metadata = {
@@ -51,51 +51,26 @@ export default function About() {
         <section className="mt-16">
           <h2 className="font-mono text-2xl font-bold tracking-tight text-ink">Where the work is public</h2>
           <div className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-3">
-            <a
-              href="https://zephryx.in/writeups/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
-            >
-              <h3 className="font-mono text-[15px] font-semibold text-ink">Writeups</h3>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-ink-dim">
-                Attack-path research, dead ends included — the same reasoning that goes into a
-                client engagement.
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-red-blood/80 transition-transform duration-300 group-hover:translate-x-0.5">
-                zephryx.in/writeups <span aria-hidden>↗</span>
-              </span>
-            </a>
-            <a
-              href="https://zephryx.in/arsenal/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
-            >
-              <h3 className="font-mono text-[15px] font-semibold text-ink">Tooling</h3>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-ink-dim">
-                Open-source recon and detection-engineering tools, including SigmaWarden, the
-                Sigma-rule linter used to validate the rules delivered on Purple Team engagements.
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-red-blood/80 transition-transform duration-300 group-hover:translate-x-0.5">
-                zephryx.in/arsenal <span aria-hidden>↗</span>
-              </span>
-            </a>
-            <a
-              href="https://zephryx.in/detections/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
-            >
-              <h3 className="font-mono text-[15px] font-semibold text-ink">Detections</h3>
-              <p className="mt-2.5 text-[13px] leading-relaxed text-ink-dim">
-                Published Sigma rules mapped to MITRE ATT&amp;CK — the format every Purple Team
-                deliverable follows.
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] text-red-blood/80 transition-transform duration-300 group-hover:translate-x-0.5">
-                zephryx.in/detections <span aria-hidden>↗</span>
-              </span>
-            </a>
+            {PUBLIC_WORK.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-surface p-6 transition-colors duration-300 hover:bg-elevated"
+              >
+                <h3 className="font-mono text-[15px] font-semibold text-ink">{item.title}</h3>
+                <p className="mt-2.5 text-[13px] leading-relaxed text-ink-dim">{item.blurb}</p>
+                {/* `block` + `break-words`, not `inline-flex`: an inline-flex
+                    container sizes to its content and will not wrap, so a
+                    hostname longer than the card silently overflows it and
+                    pushes the page into horizontal scroll. These labels grew
+                    when the research moved to its own domain. */}
+                <span className="mt-4 block break-words font-mono text-[11px] text-red-blood/80">
+                  {item.label} <span aria-hidden>↗</span>
+                </span>
+              </a>
+            ))}
           </div>
         </section>
       </Reveal>
