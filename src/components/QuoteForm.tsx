@@ -241,7 +241,7 @@ export default function QuoteForm() {
               value={fields.companySize}
               onChange={(e) => setFields((f) => ({ ...f, companySize: e.target.value }))}
               disabled={disabled}
-              className="w-full appearance-none border border-line bg-void/70 px-3.5 py-2.5 font-mono text-[13.5px] text-ink focus:border-red-deep/70 focus:outline-none disabled:opacity-60"
+              className="w-full appearance-none border border-line bg-void/70 px-3.5 py-2.5 font-mono text-[13.5px] text-ink focus:border-red-deep/70 disabled:opacity-60"
             >
               <option value="">Select…</option>
               {COMPANY_SIZES.map((s) => (
@@ -299,7 +299,7 @@ export default function QuoteForm() {
             placeholder="What are you building, what needs testing, and any timeline or deadline (audit, funding round, launch) driving it."
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? 'message-error' : undefined}
-            className="w-full resize-y border border-line bg-void/70 p-3.5 font-mono text-[13.5px] leading-relaxed text-ink placeholder:text-ink-faint focus:border-red-deep/70 focus:outline-none disabled:opacity-60"
+            className="w-full resize-y border border-line bg-void/70 p-3.5 font-mono text-[13.5px] leading-relaxed text-ink placeholder:text-ink-faint focus:border-red-deep/70 disabled:opacity-60"
           />
           {errors.message ? (
             <p id="message-error" className="mt-1.5 font-mono text-[12px] text-red-blood">
@@ -414,7 +414,7 @@ function Field({
         spellCheck={false}
         aria-invalid={!!error}
         aria-describedby={error ? errorId : undefined}
-        className="w-full border border-line bg-void/70 px-3.5 py-2.5 font-mono text-[13.5px] text-ink placeholder:text-ink-faint focus:border-red-deep/70 focus:outline-none disabled:opacity-60"
+        className="w-full border border-line bg-void/70 px-3.5 py-2.5 font-mono text-[13.5px] text-ink placeholder:text-ink-faint focus:border-red-deep/70 disabled:opacity-60"
       />
       {error ? (
         <p id={errorId} className="mt-1.5 font-mono text-[12px] text-red-blood">
