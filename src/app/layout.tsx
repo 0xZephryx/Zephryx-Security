@@ -19,7 +19,7 @@ const orgLd = {
   description: SITE.description,
   areaServed: 'Worldwide',
   parentOrganization: { '@type': 'Organization', name: SITE.parentName, url: SITE.parentUrl },
-  sameAs: [SITE.parentUrl, 'https://github.com/zephryxsec'],
+  sameAs: [SITE.parentUrl, 'https://github.com/iamzephryx'],
   serviceType: [
     'Web Application Penetration Testing',
     'Network Penetration Testing',
@@ -64,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@zephryxsec',
-    creator: '@zephryxsec',
+    site: '@iamzephryx',
+    creator: '@iamzephryx',
     title: `${SITE.name} — Penetration Testing for Startups & Businesses`,
     description: SITE.description,
   },
