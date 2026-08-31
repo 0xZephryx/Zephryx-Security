@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
-import { SERVICES, SITE } from '@/lib/site';
+import { SERVICES } from '@/lib/site';
+import { buildMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Services',
   description:
     'Web application, network, cloud, Active Directory, and API penetration testing, plus phishing simulation, purple team, and compliance-ready engagements — scoped to your business.',
-  alternates: { canonical: `${SITE.url}/services/` },
-};
+  path: '/services/',
+});
 
 export default function Services() {
   return (

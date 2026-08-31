@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import { MAILBOX, SITE } from '@/lib/site';
+import { MAILBOX } from '@/lib/site';
+import { buildMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Privacy',
   description: 'What happens to the information you submit through the request-assessment form.',
-  alternates: { canonical: `${SITE.url}/privacy/` },
-};
+  path: '/privacy/',
+});
 
 export default function Privacy() {
   return (

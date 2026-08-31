@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
-import { MAILBOX, SITE } from '@/lib/site';
+import { MAILBOX } from '@/lib/site';
 import Reveal from '@/components/Reveal';
 import QuoteForm from '@/components/QuoteForm';
+import { buildMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Request an assessment',
   description:
     'Scope a penetration testing engagement — tell me what you\'re building, what needs testing, and any deadline driving it. Replies within one business day.',
-  alternates: { canonical: `${SITE.url}/contact/` },
-};
+  path: '/contact/',
+});
 
 export default function Contact() {
   return (

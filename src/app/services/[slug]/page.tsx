@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Reveal from '@/components/Reveal';
-import { getService, SERVICES, SITE } from '@/lib/site';
+import { getService, SERVICES } from '@/lib/site';
+import { buildMetadata } from '@/lib/metadata';
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.id }));
@@ -17,11 +18,11 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
 
-  return {
+  return buildMetadata({
     title: service.title,
     description: service.summary,
-    alternates: { canonical: `${SITE.url}/services/${service.id}/` },
-  };
+    path: `/services/${service.id}/`,
+  });
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
