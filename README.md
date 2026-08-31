@@ -15,8 +15,8 @@ is the commercial front for paid engagements.
 - **Cloudflare Workers** serving `out/` as static assets, with `worker/index.ts`
   handling `/api/quote`
 
-Same shape as [zephryx.in](https://github.com/zephryxsec/zephryx.in) and
-[zephryx-academy](https://github.com/zephryxsec/zephryx-academy), deployed as
+Same shape as [zephryx.in](https://github.com/iamzephryx/zephryx.in) and
+[zephryx-academy](https://github.com/iamzephryx/zephryx-academy), deployed as
 its own Worker so a bad push here can't take the other sites down.
 
 ## Local development
