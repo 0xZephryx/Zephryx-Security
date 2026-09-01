@@ -88,6 +88,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
       <body className="min-h-screen antialiased">
+        {/* .reveal starts at opacity:0 until an IntersectionObserver fires on
+            scroll — with JS disabled that observer never runs, so this
+            forces every section (including the lead-capture form) visible
+            instead of leaving a JS-disabled visitor looking at a blank page. */}
+        <noscript>
+          <style>{'.reveal { opacity: 1 !important; transform: none !important; }'}</style>
+        </noscript>
+
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger

@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MAILBOX, PUBLIC_WORK, SITE } from '@/lib/site';
 import Reveal from '@/components/Reveal';
+import { buildMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'About',
   description:
     'Zephryx Security is run by the penetration tester and security researcher behind zephryx.in — public writeups, open-source tooling and detection rules as proof of work before you ever get on a call.',
-  alternates: { canonical: `${SITE.url}/about/` },
-};
+  path: '/about/',
+});
 
 export default function About() {
   return (
@@ -24,7 +25,12 @@ export default function About() {
         <div className="mt-10 space-y-6 text-[15px] leading-relaxed text-ink-dim">
           <p>
             {SITE.name} is run by the same person behind{' '}
-            <a href={SITE.parentUrl} className="text-red-blood hover:underline">
+            <a
+              href={SITE.parentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-blood hover:underline"
+            >
               zephryx.in
             </a>{' '}
             — a penetration tester and security researcher who spends the week breaking into

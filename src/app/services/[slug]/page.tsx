@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Reveal from '@/components/Reveal';
-import { getService, SERVICES, SITE } from '@/lib/site';
+import { getService, SERVICES } from '@/lib/site';
+import { buildMetadata } from '@/lib/metadata';
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.id }));
@@ -17,11 +18,11 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
 
-  return {
+  return buildMetadata({
     title: service.title,
     description: service.summary,
-    alternates: { canonical: `${SITE.url}/services/${service.id}/` },
-  };
+    path: `/services/${service.id}/`,
+  });
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -34,6 +35,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-4xl px-5 pt-32 pb-16 sm:px-8">
       <Reveal>
+        <Link
+          href="/services/"
+          className="mb-5 inline-block font-mono text-[12px] text-ink-faint transition-colors hover:text-red-blood"
+        >
+          ← all services
+        </Link>
         <p className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">
           SERVICE {String(idx + 1).padStart(2, '0')} / {SERVICES.length}
         </p>

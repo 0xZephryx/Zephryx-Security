@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
-import { PROCESS, SITE } from '@/lib/site';
+import { PROCESS } from '@/lib/site';
+import { buildMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'Process',
   description:
     'How a Zephryx Security engagement runs, from scoping call to retest — rules of engagement, testing windows, reporting, and what happens if something critical turns up mid-engagement.',
-  alternates: { canonical: `${SITE.url}/process/` },
-};
+  path: '/process/',
+});
 
 const RULES = [
   'Nothing is tested outside the written scope — no exceptions, no "while I was in there".',

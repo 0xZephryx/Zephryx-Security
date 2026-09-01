@@ -77,7 +77,12 @@ export default function Home() {
         <Reveal delay={260}>
           <p className="mt-8 font-mono text-[12px] text-ink-faint">
             <span className="text-red-blood/70">$</span> same person behind{' '}
-            <a href={SITE.parentUrl} className="text-red-blood/80 hover:text-red-blood">
+            <a
+              href={SITE.parentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-blood/80 hover:text-red-blood"
+            >
               zephryx.in
             </a>{' '}
             — the writeups, tooling and Sigma rules are public, so the work is verifiable before
