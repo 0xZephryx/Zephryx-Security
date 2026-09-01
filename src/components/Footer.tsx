@@ -19,7 +19,12 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-dim">{SITE.tagline}</p>
             <p className="mt-4 font-mono text-[11px] leading-relaxed text-ink-faint">
               Offensive security from{' '}
-              <a href={SITE.parentUrl} className="text-red-blood/80 hover:text-red-blood">
+              <a
+                href={SITE.parentUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-blood/80 hover:text-red-blood"
+              >
                 {SITE.parentName}
               </a>
               .

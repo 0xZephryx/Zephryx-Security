@@ -31,6 +31,7 @@ function NavLink({
         tabIndex={tabIndex}
       >
         {children}
+        <span className="sr-only"> — leaves security.zephryx.in, opens in a new tab</span>
       </a>
     );
   }
@@ -38,6 +39,18 @@ function NavLink({
     <Link href={item.href} aria-current={active ? 'page' : undefined} className={className} tabIndex={tabIndex}>
       {children}
     </Link>
+  );
+}
+
+/**
+ * Small "you're leaving this site" glyph for external NAV entries — matches
+ * the pattern on the sibling sites' nav, so the network reads as one system.
+ */
+function ExternalGlyph({ className = '' }: { className?: string }) {
+  return (
+    <span className={`font-mono text-[10px] ${className}`} aria-hidden>
+      ↗
+    </span>
   );
 }
 
@@ -103,32 +116,39 @@ export default function Nav() {
         </Link>
 
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
-          {NAV.map((item) => {
+          {NAV.map((item, i) => {
             const active = !item.external && isActive(item.href);
+            // zephryx.in leaves this origin entirely — a divider marks where
+            // the row stops being this site's pages and starts being a jump
+            // to a sibling one, matching the pattern on the sibling sites.
+            const startsExternalCluster = item.external && !NAV[i - 1]?.external;
             return (
-              <NavLink
-                key={item.href}
-                item={item}
-                active={active}
-                className={`group relative flex items-baseline gap-1.5 px-3 py-2 font-mono text-[13px] transition-colors duration-300 ${
-                  active ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
-                }`}
-              >
-                {item.label}
-                <span
-                  className={`text-[10px] transition-colors duration-300 ${
-                    active ? 'text-red-blood/70' : 'text-ink-faint/60 group-hover:text-red-blood/60'
+              <span key={item.href} className="flex items-center">
+                {startsExternalCluster ? <span className="mx-1.5 h-4 w-px bg-line" aria-hidden /> : null}
+                <NavLink
+                  item={item}
+                  active={active}
+                  className={`group relative flex items-baseline gap-1.5 px-3 py-2 font-mono text-[13px] transition-colors duration-300 ${
+                    active ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
                   }`}
-                  aria-hidden
                 >
-                  {item.cmd}
-                </span>
-                <span
-                  className={`absolute inset-x-2.5 bottom-1 h-px origin-left bg-red-blood transition-transform duration-300 ${
-                    active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  }`}
-                />
-              </NavLink>
+                  {item.label}
+                  {item.external ? <ExternalGlyph className="text-ink-faint/70 group-hover:text-red-blood/70" /> : null}
+                  <span
+                    className={`text-[10px] transition-colors duration-300 ${
+                      active ? 'text-red-blood/70' : 'text-ink-faint/60 group-hover:text-red-blood/60'
+                    }`}
+                    aria-hidden
+                  >
+                    {item.cmd}
+                  </span>
+                  <span
+                    className={`absolute inset-x-2.5 bottom-1 h-px origin-left bg-red-blood transition-transform duration-300 ${
+                      active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                  />
+                </NavLink>
+              </span>
             );
           })}
           <Link
@@ -159,23 +179,35 @@ export default function Nav() {
         }`}
       >
         <nav className="flex flex-col px-5 py-3" aria-label="Mobile" aria-hidden={!open}>
-          {NAV.map((item) => {
+          {NAV.map((item, i) => {
             const active = !item.external && isActive(item.href);
+            const startsExternalCluster = item.external && !NAV[i - 1]?.external;
             return (
-              <NavLink
-                key={item.href}
-                item={item}
-                active={active}
-                tabIndex={open ? undefined : -1}
-                className={`flex items-center justify-between border-b border-line/50 py-3.5 font-mono text-sm last:border-0 ${
-                  active ? 'text-red-blood' : 'text-ink-dim'
-                }`}
-              >
-                <span>{item.label}</span>
-                <span className="text-[11px] text-ink-faint" aria-hidden>
-                  {item.cmd}
-                </span>
-              </NavLink>
+              <span key={item.href}>
+                {startsExternalCluster ? (
+                  <div className="flex items-center gap-2 pt-2.5 pb-1 font-mono text-[10px] uppercase tracking-wider text-ink-faint">
+                    <span className="h-px flex-1 bg-line/50" aria-hidden />
+                    the zephryx network
+                    <span className="h-px flex-1 bg-line/50" aria-hidden />
+                  </div>
+                ) : null}
+                <NavLink
+                  item={item}
+                  active={active}
+                  tabIndex={open ? undefined : -1}
+                  className={`flex items-center justify-between border-b border-line/50 py-3.5 font-mono text-sm last:border-0 ${
+                    active ? 'text-red-blood' : 'text-ink-dim'
+                  }`}
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    {item.label}
+                    {item.external ? <ExternalGlyph className="text-ink-faint" /> : null}
+                  </span>
+                  <span className="text-[11px] text-ink-faint" aria-hidden>
+                    {item.cmd}
+                  </span>
+                </NavLink>
+              </span>
             );
           })}
           <Link href="/contact/" className="py-3.5 font-mono text-sm text-red-blood" tabIndex={open ? undefined : -1}>

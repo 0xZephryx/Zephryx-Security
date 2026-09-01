@@ -25,7 +25,12 @@ export default function About() {
         <div className="mt-10 space-y-6 text-[15px] leading-relaxed text-ink-dim">
           <p>
             {SITE.name} is run by the same person behind{' '}
-            <a href={SITE.parentUrl} className="text-red-blood hover:underline">
+            <a
+              href={SITE.parentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-blood hover:underline"
+            >
               zephryx.in
             </a>{' '}
             — a penetration tester and security researcher who spends the week breaking into

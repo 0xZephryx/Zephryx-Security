@@ -35,6 +35,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-4xl px-5 pt-32 pb-16 sm:px-8">
       <Reveal>
+        <Link
+          href="/services/"
+          className="mb-5 inline-block font-mono text-[12px] text-ink-faint transition-colors hover:text-red-blood"
+        >
+          ← all services
+        </Link>
         <p className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">
           SERVICE {String(idx + 1).padStart(2, '0')} / {SERVICES.length}
         </p>
